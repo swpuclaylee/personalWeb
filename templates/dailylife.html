@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="center">
+               <h2>DailyLife</h2>
+               <p class="lead">在这里我会分享我的日常生活，喜怒哀乐愁仇怨。</p>
+            </div>
+        
+
+            <ul class="portfolio-filter text-center">
+                <li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
+                <li><a class="btn btn-default" href="#" data-filter=".bootstrap">Study</a></li>
+                <li><a class="btn btn-default" href="#" data-filter=".html">Entertainment</a></li>
+                <li><a class="btn btn-default" href="#" data-filter=".wordpress">Travel</a></li>
+            </ul><!--/#portfolio-filter-->
+
+            <div class="row">
+                <div class="portfolio-items">
+                    {% for daily_life in daily_life_list %}
+                        <div class="portfolio-item {{ daily_life.dClass }} col-xs-12 col-sm-4 col-md-3">
+                             <div class="recent-work-wrap">
+                                <img class="img-responsive" src="/static/media/{{ daily_life.dSmallImage }}" alt="">
+                                <div class="overlay">
+                                <div class="recent-work-inner">
+                                    <p>{{ daily_life.dContent }}</p>
+                                    <a class="preview" href="/static/media/{{ daily_life.dLargerImage }}" rel="prettyPhoto"><i class="fa fa-eye"></i> 查看</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/.portfolio-item-->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section><!--/#portfolio-item-->
+{% endblock %}

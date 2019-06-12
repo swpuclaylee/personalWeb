@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<style>
+    .icon-qq{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-position: center center;
+        background-image: url(/static/images/ico/qq.jpg);
+    }
+</style>
+{% block content %}
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide">
+            <div class="carousel-inner">
+                {% for home_welcome in home_welcome_list %}
+                    <div class="item active" style="background-image: url({% static 'images/slider/bg2.jpg' %})">
+                    <div class="container">
+                        <div class="row slide-margin">
+                            <div class="col-sm-6">
+                                <div class="carousel-content">
+                                    <h1 class="animation animated-item-1">{{ home_welcome.content1 }}</h1>
+                                    <h2 class="animation animated-item-2">{{ home_welcome.content2 }}</h2>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 hidden-xs animation animated-item-4">
+                                <div class="slider-img">
+                                    <img src="/static/media/{{ home_welcome.pic1_path }}" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.item-->
+                {% endfor %}
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+    </section><!--/#main-slider-->
+
+    <section id="feature" >
+        <div class="container">
+           <div class="center wow fadeInDown">
+                <h2>社交</h2>
+                <p class="lead">下面是我的一些社交账号，你可以关注或者添加来了解我</p>
+            </div>
+            <div class="row">
+                <div class="features">
+                     {% for social in social_list %}
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="{{ social.socialClass }}"></i>
+                            <h2>{{ social.socialMode }}</h2>
+                            <h3>{{ social.socialName }}</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+                   {% endfor %}
+                </div><!--/.services-->
+            </div><!--/.row-->    
+        </div><!--/.container-->
+    </section><!--/#feature-->
+
+    <section id="recent-works">
+        <div class="container">
+            <div class="center wow fadeInDown">
+                <h2>最近工作</h2>
+            </div>
+            <div class="row">
+                {% for recent_work in recent_work_list %}
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="recent-work-wrap">
+                        <img class="img-responsive" src="/static/media/{{ recent_work.smallImage }}" alt="">
+                        <div class="overlay">
+                            <div class="recent-work-inner">
+                                <h3><a href="#">{{ recent_work.workName }}</a> </h3>
+                                <p>{{ recent_work.workContent }}</p>
+                                <a class="preview" href="/static/media/{{ recent_work.largerImage }}" rel="prettyPhoto"><i class="fa fa-eye"></i> 查看</a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#recent-works-->
+
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 wow fadeInDown">
+                   <div class="tab-wrap"> 
+                        <div class="media">
+                            <div class="parrent pull-left">
+                                <ul class="nav nav-tabs nav-stacked">
+                                    <li class=""><a href="#tab1" data-toggle="tab" class="analistic-01">搞笑段子</a></li>
+                                    <li class="active"><a href="#tab2" data-toggle="tab" class="analistic-02">搞笑段子</a></li>
+                                    <li class=""><a href="#tab3" data-toggle="tab" class="tehnical">幽默笑话</a></li>
+                                    <li class=""><a href="#tab4" data-toggle="tab" class="tehnical">幽默笑话</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="parrent media-body">
+                                <div class="tab-content">
+                                {% for funny_paragraph in funny_paragraph_list %}
+                                    <div class="{{ funny_paragraph.pClass }}" id="{{ funny_paragraph.pId }}">
+                                        <div class="media">
+                                           <div class="pull-left">
+                                                <img class="img-responsive" src="/static/media/{{ funny_paragraph.pImage }}">
+                                            </div>
+                                            <div class="media-body">
+                                                 <p>
+                                                     {{ funny_paragraph.pContent }}
+                                                 </p>
+                                            </div>
+                                        </div>
+                                     </div>
+                                {% endfor %}
+                                {% for humorous_joke in humorous_joke_list %}
+                                       <div class="tab-pane fade" id="{{ humorous_joke.pId }}">
+                                        <p>{{ humorous_joke.pContent }}</p>
+                                     </div>
+                                {% endfor %}
+                                 </div> <!--/.tab-content-->
+                            </div> <!--/.media-body--> 
+                        </div> <!--/.media-->     
+                    </div><!--/.tab-wrap-->               
+                </div><!--/.col-sm-6-->
+
+                <div class="col-xs-12 col-sm-4 wow fadeInDown">
+                    <div class="testimonial">
+                        <h2>关于这个网站</h2>
+                         <div class="media testimonial-inner">
+                            <div class="media-body">
+                                <p>2018年夏天我用django搭建了一个非常小的博客系统，自己在本地调试的时候在上面发布文章、评论等等觉得非常有意思。如果把它搭建在服务器上，它就像一个只属于自己的微博。但由于电脑及自己操作的问题该系统的运行环境被破坏掉，借此毕业设计的机会完成一个只属于自己的个人网站系统。在这上面我会发布一些文章以及日常生活等等。首先，请先看下左边的开胃小菜吧！</p>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#content-->
+
+{% endblock %}

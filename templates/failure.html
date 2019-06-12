@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <section id="error" class="container text-center">
+        <p>文章不存在</p>
+        <a class="btn btn-primary" href="{% url 'my_index' %}">回到主页</a>
+    </section><!--/#error-->
+{% endblock %}

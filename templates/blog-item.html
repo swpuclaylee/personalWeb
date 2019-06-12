@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2>Blog</h2>
+        </div>
+
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-8">
+                        <div class="blog-item">
+                        <img class="img-responsive img-blog" src="/static/media/{{ article.image }}" width="100%" alt="" />
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-2 text-center">
+                                    <div class="entry-meta">
+                                        <span id="publish_date">{{ article.date_publish | date:'Y-m-d' }}</span>
+                                        <span><i class="fa fa-comment"></i>{{ article.commentmodel_set.all.count  }} 评论</span>
+                                        <span><i class="fa fa-heart"></i>{{ article.click_count }} 浏览</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-10 blog-content">
+                                    <h2>{{ article.title }}</h2>
+                                    <p>{{ article.content | safe}}</p>
+                                    <div class="post-tags">
+                                        <strong>标签:</strong>
+                                        {% for tag in article.tag.all %}
+                                            <a href="?tag={{ tag.name }}" rel="tag">{{ tag }}/</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--/.blog-item-->
+
+                    {% for comment in comment_list %}
+                        <div class="media comment_section">
+                                <div class="media-body post_reply_comments">
+                                    <h2>{{ comment.name }}</h2>
+                                    <h4>{{ comment.date_publish }}</h4>
+                                    <p>{{ comment.content | safe }}</p>
+                                </div>
+                        </div>
+                    {% endfor %}<!--/.blog-comment-->
+
+
+                        <div id="contact-page clearfix">
+                            <div class="status alert alert-success" style="display: none"></div>
+                            <div class="message_heading">
+                                <p>您可以在这里评论</p>
+                            </div> 
+      
+                            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="{% url 'comment_post' %}" role="form">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label>姓名</label>
+                                            <input type="text" class="form-control" required="required" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>邮箱</label>
+                                            <input type="email" class="form-control" required="required" name="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>文章ID</label>
+                                            <input  class="form-control" name="id">
+                                        </div>                    
+                                    </div>
+                                    <div class="col-sm-7">                        
+                                        <div class="form-group">
+                                            <label>信息</label>
+                                            <textarea name="message" id="message" required="required" class="form-control" rows="8"></textarea>
+                                        </div>                        
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-lg" required="required">提交</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>     
+                        </div><!--/#contact-page-->
+                    </div><!--/.col-md-8-->
+
+                <aside class="col-md-4">
+    			<div class="widget archieve">
+                        <h3>文章归档</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="blog_archieve">
+                                    {% for archive in archive_list %}
+                                        <li><a href="{% url "archive" %}?year={{ archive | slice:":4" }}&month={{ archive | slice:"5:7" }}"><i class="fa fa-angle-double-right"></i>{{ archive }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!--/.archieve-->
+
+                    <div class="widget tags">
+                        <h3>标签云</h3>
+                        <ul class="tag-cloud">
+                            {% for tag in tag_list %}
+                                <li><a class="btn btn-xs btn-primary" href="{% url 'tag_name' %}?tag={{ tag.tag }}">{{ tag.tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div><!--/.tags-->
+    				
+    				<div class="widget blog_gallery">
+                        <h3>广告</h3>
+                        <ul class="sidebar-gallery">
+                            {% for ad in ad_list %}
+                                <li><a href="http://www.w3school.com.cn"><img src="/static/media/{{ ad.adImage }}" alt="" /></a></li>
+                            {% endfor %}
+                        </ul>
+                    </div><!--/.blog_gallery-->
+    					
+    				
+                </aside>     
+
+            </div><!--/.row-->
+
+         </div><!--/.blog-->
+
+    </section><!--/#blog-->
+{% endblock %}

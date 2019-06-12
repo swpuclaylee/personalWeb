@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+    {% block content %}
+    <section id="about-us">
+        <div class="container">
+          <div class="clients-area center wow fadeInDown">
+                <h2>我喜欢的电影</h2>
+                <p class="lead">学会享受生活本身，不用急着赶往下一站，此刻，就很美好。拥有从容淡定的内心，才会拥有闲适平和的状态和生活。</p>
+            </div>
+
+            <div class="row">
+                {% for movie in movie_list %}
+                    <div class="col-md-4 wow fadeInDown">
+                        <div class="clients-comments text-center">
+                            <img src="/static/media/{{ movie.mImage }}" class="img-circle" alt="">
+                            <h3>{{ movie.mComment }}</h3>
+                            <h4><span>{{ movie.mName}}</span><a href="{{ movie.mUrl }}">点击观看</a></h4>
+                        </div>
+                    </div>
+                {% endfor %}
+           </div>
+
+			<!-- our-team -->
+			<div class="team">
+				<div class="center wow fadeInDown">
+					<h2>我喜欢的书籍</h2>
+					<p class="lead">书，如细雨过后的梧桐，洗去了浮华，透出了青绿。在清闲午后，子落日黄昏，用眼睛读书，用心读书。读不尽精彩丰富的书。</p>
+				</div>
+
+                <div class="row clearfix">
+                    {% for book1 in book1_list %}
+                        <div class="{{ book1.bClassFirst }}">
+                            <div class="{{ book1.bClassSecond }}" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <a href="#"><img class="media-object" src="/static/media/{{ book1.bImage }}" alt=""></a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>{{ book1.bName }}</h4>
+                                        <h5>{{ book1.bAuthor }}</h5>
+                                        <a href="{{ book1.bUrl }}"><p>点击阅读</p></a>
+                                    </div>
+                                </div><!--/.media -->
+                                <p>{{ book1.bComment }}</p>
+                            </div>
+					    </div><!--/.col-lg-4 -->
+                    {% endfor %}
+                 </div>	<!--/.row-->
+				<div class="row team-bar">
+					<div class="first-one-arrow hidden-xs">
+						<hr>
+					</div>
+					<div class="first-arrow hidden-xs">
+						<hr> <i class="fa fa-angle-up"></i>
+					</div>
+					<div class="second-arrow hidden-xs">
+						<hr> <i class="fa fa-angle-down"></i>
+					</div>
+					<div class="third-arrow hidden-xs">
+						<hr> <i class="fa fa-angle-up"></i>
+					</div>
+					<div class="fourth-arrow hidden-xs">
+						<hr> <i class="fa fa-angle-down"></i>
+					</div>
+				</div> <!--skill_border-->
+
+				<div class="row clearfix">
+                    {% for book2 in book2_list %}
+                        <div class="col-md-4 col-sm-6 col-md-offset-2">
+                            <div class="single-profile-bottom wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <a href="#"><img class="media-object" src="/static/media/{{ book2.bImage }}" alt=""></a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <h4>{{ book2.bName }}</h4>
+                                        <h5>{{ book2.bAuthor }}</h5>
+                                        <a href="{{ book2.bUrl }}"><p>点击阅读</p></a>
+                                    </div>
+                                </div><!--/.media -->
+                                <p>{{ book2.bComment }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>	<!--/.row-->
+			</div><!--section-->
+		</div><!--/.container-->
+    </section><!--/about-us-->
+    {% endblock %}
